@@ -1,7 +1,7 @@
 from typing import final
 from django.shortcuts import render
 from django.views.generic import TemplateView
-
+from typing import final
 from articles.models import Article
 
 #class HomePageView(TemplateView):
