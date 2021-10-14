@@ -1,0 +1,75 @@
+{% extends 'users/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+<div class="jumbotron">
+<h1 class="display-4">Blog app</h1>
+<p class="lead">A blog website built with Django.</p>
+<p class="lead">
+<a class="btn btn-primary btn-lg" href="{% url 'article_list' %}"
+role="button">View All Articles</a>
+</p>
+</div>
+
+<hr>
+<br>
+    {% if user.is_authenticated %}
+    <h6 style="color:rgb(26, 20, 19);">CLICK TO ADD NEW BLOG :
+    <a class="btn btn-primary btn-lg" href="{% url 'article_new' %}"
+role="button">NEW</a></h6>
+    
+<br>
+
+<hr>
+<br>
+{% if iter%}
+<h4 style="color: rgb(20, 21, 22);text-align: center;">BLOGS YOU ALREADY CREATED:</h4>
+<br>
+{%endif%}
+{% if not iter%}
+<h4>YOU HAVN'T CREATED ANY BLOGS!</h4>
+<h4>CLICK ON NEW TO ADD YOUR NEW BLOG</h4>
+{% endif %}
+{% for article in iter %}
+
+
+<div class="card">
+    <span class="border border-dark">
+<div class="card-header">
+<span class="font-weight-bold" style="color:darkblue;">{{ article.title }}</span> &middot;
+<span class="text-muted">by you |
+{{ article.date }}</span>
+
+</div>
+<div class="card-body">
+{{ article.body }}
+
+</div>
+    <div class="card-footer text-center text-muted">
+        
+        <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+        <a href="{% url 'article_delete' article.pk %}">Delete</a>
+        </div>  
+        <div class="card-footer">
+         {%if article.comment.all%}
+            <h6 style="color: rgb(62, 16, 230); text-decoration:aliceblue;padding-left: 40%;">comments:</h6>  
+            {% for comment in article.comment.all %}
+            <p>
+            &ensp;<span class="font-weight-bold">{{ comment.author }}:</span>
+            {{ comment }}
+            </p>
+            {% endfor %}
+            <br>
+        {% endif %}
+            </div>
+        </span>
+</div>
+<br/>
+
+{% endfor %}
+
+
+    {% endif %}
+
+
+{% endblock content %}
