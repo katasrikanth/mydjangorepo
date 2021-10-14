@@ -1,15 +1,13 @@
 from typing import final
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from typing import final
 from articles.models import Article
 
 
 def HomePageView(request):
      if request.user.is_authenticated:
           current_user= request.user
-          final=Article.objects.filter(author=current_user)
-          return render(request,'users/home.html',{'iter':final})
+          return render(request,'users/home.html',{'iter':Article.objects.filter(author=current_user)})
      else:
           return render(request,'users/home.html')
 
