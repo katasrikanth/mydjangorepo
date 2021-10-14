@@ -4,8 +4,6 @@ from django.views.generic import TemplateView
 from typing import final
 from articles.models import Article
 
-#class HomePageView(TemplateView):
-   #  template_name = 'users/home.html'
 
 def HomePageView(request):
      if request.user.is_authenticated:
