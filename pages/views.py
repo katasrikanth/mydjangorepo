@@ -1,4 +1,3 @@
-from typing import final
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from articles.models import Article
